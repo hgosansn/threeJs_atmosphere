@@ -26,3 +26,13 @@ jobs:
       run: |
         npm install 
         npx webpack --config ./webpack.prod.js
+        
+        git checkout release
+
+        mv -f ./dist .
+
+        git rm -r --cached .
+        git add .
+
+        git commit -m "Github action"
+        git push origin release
