@@ -27,6 +27,7 @@ jobs:
         npm install 
         npx webpack --config ./webpack.prod.js
         
+        git fetch
         git checkout release
 
         mv -f ./dist .
