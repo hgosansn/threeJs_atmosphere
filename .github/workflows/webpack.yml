@@ -30,10 +30,8 @@ jobs:
         git fetch
         git checkout release
 
-        mv -f ./dist .
-
         git rm -r --cached .
-        git add .
+        git add dist
 
         git commit -m "Github action"
         git push -u origin release --force
