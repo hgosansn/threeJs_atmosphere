@@ -4,6 +4,9 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Shader1 } from "./fragment1.js";
 import { GlowShader } from "./glowShader.js";
 
+// used for resource imports
+var projectBaseUrl = "threeJs_atmosphere/"
+
 var rotationMap = { x: 85, y: -163, z: 20 };
 var glsl_params = {
   [GlowShader.params.intensity]: 0.9,
@@ -63,7 +66,7 @@ export const loadAnimation = () => {
   scene.add(gridHelper);
   gridHelper.position.set(0, -5, 0);
 
-  var texture = new THREE.TextureLoader().load("assets/blackearth.jpg");
+  var texture = new THREE.TextureLoader().load(projectBaseUrl + "assets/blackearth.jpg");
   const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(10, 50, 50),
     new THREE.ShaderMaterial({
