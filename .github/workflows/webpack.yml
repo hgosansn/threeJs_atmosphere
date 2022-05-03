@@ -29,9 +29,11 @@ jobs:
         
         git fetch
         git checkout release
+        
+        mv -f ./dist ./build
 
         git rm -r --cached .
-        git add dist
+        git add ./build
 
         git commit -m "Github action"
         git push -u origin release --force
