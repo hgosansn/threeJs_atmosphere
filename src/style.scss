@@ -1,0 +1,62 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic);
+
+@import url(https://fonts.googleapis.com/css?family=PT+Serif:400,700&subset=latin,cyrillic);
+
+
+
+
+$maxWidth: 1200px;
+
+body {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+  
+  background-size: cover;
+}
+
+* {
+  box-sizing: border-box;
+  a, a:visited, a:active {
+    text-decoration: none;
+    color: lightskyblue;
+  }
+  a {
+    & span.link-name{
+      visibility: hidden;
+      position: absolute;
+    }
+    & i{
+      color: var(--foreground);
+    }
+  }
+  *:focus {
+    outline: none;
+  }
+  
+}
+
+// THree JS 
+#background{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.controls{
+  position: absolute;
+  bottom: 0;
+}
+@media screen and (max-width: 790px) {
+  .introJs, .intrOplaceholder{
+    display: none;
+  }
+}
+
+.intrOplaceholder{
+  position: absolute;
+}
