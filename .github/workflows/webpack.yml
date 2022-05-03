@@ -35,4 +35,4 @@ jobs:
         git add .
 
         git commit -m "Github action"
-        git push origin release
+        git push -u origin release --force
