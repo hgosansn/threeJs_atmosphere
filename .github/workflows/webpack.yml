@@ -27,6 +27,10 @@ jobs:
         npm install 
         npx webpack --config ./webpack.prod.js
         
+        
+        git config --global user.email "mail@example.com"
+        git config --global user.name "Github_Action"
+        
         git fetch
         git checkout release
         
