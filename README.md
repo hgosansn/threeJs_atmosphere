@@ -6,7 +6,7 @@ Also where is the sun
 
 ---
 
-![Latest Build](https://github.com/hgosansn/threeJs_atmosphere/actions/workflows/webpack.yml/badge.svg?event=tag)
+![Latest Build](https://github.com/hgosansn/threeJs_atmosphere/actions/workflows/webpack.yml/badge.svg?branch=release)
 
 Sandbox earth with atmosphere made using three.js
 
