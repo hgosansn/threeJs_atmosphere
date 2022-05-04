@@ -1,0 +1,8 @@
+{
+  "main.js": "/bundle.js",
+  "assets/blackearth.jpg": "/assets/blackearth.jpg",
+  "threejs_experiment.js": "/threejs_experiment.js",
+  "fragment1.js": "/fragment1.js",
+  "index.html": "/index.html",
+  "glowShader.js": "/glowShader.js"
+}
