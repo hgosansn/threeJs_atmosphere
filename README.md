@@ -4,9 +4,9 @@
 
 Also where is the sun
 
+---
 
-![Latest Build](https://github.com/hgosansn/threeJs_atmosphere/actions/workflows/webpack.yml/badge.svg)
-
+![Latest Build](https://github.com/hgosansn/threeJs_atmosphere/actions/workflows/webpack.yml/badge.svg?event=tag)
 
 Sandbox earth with atmosphere made using three.js
 
@@ -17,3 +17,7 @@ Sandbox earth with atmosphere made using three.js
 >npm run build
 
 Outputs to dist folder
+
+### Sources
+
+Earth UV Image [here](src/assets/blackearth.jpg) is from https://www.solarsystemscope.com/textures/
