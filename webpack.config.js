@@ -46,7 +46,13 @@ module.exports = {
             ignore: [
               '**/*.scss',
               '**/*.sass',
-              '**/index.js'
+              '**/index.js',
+              '**/*.jpg',
+              '**/*.jpeg',
+              '**/*.png',
+              '**/*.gif',
+              '**/*.svg',
+              '**/*.webp',
             ]
           }
         },
@@ -82,6 +88,10 @@ module.exports = {
       },
       {
         test: /\.html$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg|webp)$/i,
         type: "asset/resource",
       },
     ],
