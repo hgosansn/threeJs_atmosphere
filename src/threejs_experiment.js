@@ -9,7 +9,9 @@ import earthTexture from "./assets/blackearth.jpg";
 // Config
 // ---------------------------------------------------------------------------
 const CANVAS_ID        = "background";
-const INITIAL_ROTATION = { x: 85, y: -163, z: 20 }; // degrees
+// Start with equator horizontal and center roughly over mid-Atlantic (~lon -30°)
+// For longitude L, yaw = -L - 90 (deg). For L = -30 => yaw = -(-30) - 90 = -60
+const INITIAL_ROTATION = { x: 0, y: -60, z: 0 }; // degrees
 const CAMERA_Z         = 20;
 const AUTO_ROTATE_Y    = 0.02;   // rad/s — slow drift
 const FPS_CAP          = 60;
@@ -18,12 +20,29 @@ const FRAME_MIN_MS     = 1000 / FPS_CAP;
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-function resizeCanvasToDisplaySize(renderer, camera) {
+function resizeCanvasToDisplaySize(renderer, camera, targetAspect) {
   const canvas = renderer.domElement;
-  const width  = canvas.clientWidth;
-  const height = canvas.clientHeight;
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  // Determine canvas size that preserves the target aspect and fits viewport
+  let width, height;
+  if (vw / vh > targetAspect) {
+    // Viewport is wider than target: use full height
+    height = vh;
+    width = Math.round(height * targetAspect);
+  } else {
+    // Viewport is narrower or equal: use full width
+    width = vw;
+    height = Math.round(width / targetAspect);
+  }
+
   if (canvas.width !== width || canvas.height !== height) {
+    // Keep the drawing buffer size in sync and set the CSS size so the canvas
+    // scales up/down without stretching (preserves aspect ratio).
     renderer.setSize(width, height, false);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
   }
@@ -54,8 +73,16 @@ export const loadAnimation = () => {
 
   // Renderer
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Target aspect ratio — preserve the canvas' initial aspect and scale the
+  // canvas up/down to fit the viewport without squashing.
+  const TARGET_ASPECT = (canvas.clientWidth && canvas.clientHeight)
+    ? canvas.clientWidth / canvas.clientHeight
+    : window.innerWidth / window.innerHeight;
+
+  // Initial resize to set proper drawing buffer size and CSS size
+  resizeCanvasToDisplaySize(renderer, camera, TARGET_ASPECT);
 
   // Controls — orbit only, no auto-rotate (globe self-rotates)
   const controls = new OrbitControls(camera, canvas);
@@ -135,7 +162,7 @@ export const loadAnimation = () => {
     // Arc lifecycle
     updateArcs(arcState, dt);
 
-    resizeCanvasToDisplaySize(renderer, camera);
+    resizeCanvasToDisplaySize(renderer, camera, TARGET_ASPECT);
     controls.update();
     renderer.render(scene, camera);
   };
